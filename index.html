@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <script src="./jquery-1.12.3.js"></script>
+    <script>
+        $(function(){
+            // alert("aaa");
+            let x = 1;
+            let o = 0;
+            let cur = 0;
+            let start = false;
+            $(".game").click(function(){
+                if(!start){
+                    return;
+                }
+                if($(this).text() === "o" || $(this).text() === "x"){
+                    return;
+                }
+                if(cur === o){
+                    $(this).text("o");
+                }else{
+                    $(this).text("x");
+                }
+                if(judge($(this).index())){
+                    $("#info").text("游戏结束");
+                    $("#board2").empty();
+                    $("#end").attr("display","block");
+                    start = false;
+                }
+
+                cur = 1 - cur;
+                // $("#board2").text("轮到" +( cur === o? "O":"X"));
+            })
+            $("#startBtn").click(function(){
+                $("#end").attr("display","none");
+                start = true;
+                $(".game").empty();
+                $("#info").text("游戏进行中");
+            })
+            $("#resetBtn").click(function(){
+                $("#end").attr("display","none");
+                $(".game").empty();
+                start = false;
+                $("#info").text("游戏未开始");
+            })
+            function judge(index){
+                let v0 = $(".game:eq(0)").text();
+                let v1 = $(".game:eq(1)").text();
+                let v2 = $(".game:eq(2)").text();
+                let v3 = $(".game:eq(3)").text();
+                let v4 = $(".game:eq(4)").text();
+                let v5 = $(".game:eq(5)").text();
+                let v6 = $(".game:eq(6)").text();
+                let v7 = $(".game:eq(7)").text();
+                let v8 = $(".game:eq(8)").text();
+                let count = 0;
+                $.each($(".game"),(index,item)=>{
+                    count += $(item).text() === "" ? 0: 1;
+                })
+                if(count >= 9){
+
+                    $("#board1").append("<p>平局</p>");
+                    return true;
+                }
+                if(index === 0 || index === 8 || index === 4){
+                    if($(".game:eq(0)").text() === $(".game:eq(8)").text()
+                        && $(".game:eq(0)").text() === $(".game:eq(4)").text()){
+                        if($(".game:eq(0)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>");
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>");
+                            return true;
+                        }
+                    }
+                }
+                if(index === 0 || index === 1 || index === 2){
+                    if($(".game:eq(0)").text() === $(".game:eq(1)").text()
+                        && $(".game:eq(0)").text() === $(".game:eq(2)").text()){
+                        if($(".game:eq(0)").text() === "x"){
+
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 2 || index === 4 || index === 6){
+                    if($(".game:eq(6)").text() === $(".game:eq(2)").text()
+                        && $(".game:eq(6)").text() === $(".game:eq(4)").text()){
+                        if($(".game:eq(6)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 3 || index === 4 || index === 5){
+                    if($(".game:eq(3)").text() === $(".game:eq(5)").text()
+                        && $(".game:eq(3)").text() === $(".game:eq(4)").text()){
+                        if($(".game:eq(3)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 6 || index === 7 || index === 8){
+                    if($(".game:eq(6)").text() === $(".game:eq(7)").text()
+                        && $(".game:eq(6)").text() === $(".game:eq(8)").text()){
+                        if($(".game:eq(6)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 0 || index === 3 || index === 6){
+                    if($(".game:eq(6)").text() === $(".game:eq(0)").text()
+                        && $(".game:eq(6)").text() === $(".game:eq(3)").text()){
+                        if($(".game:eq(6)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 1 || index === 4 || index === 7){
+                    if($(".game:eq(1)").text() === $(".game:eq(7)").text()
+                        && $(".game:eq(1)").text() === $(".game:eq(4)").text()){
+                        if($(".game:eq(1)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                if(index === 2 || index === 5 || index === 8){
+                    if($(".game:eq(2)").text() === $(".game:eq(5)").text()
+                        && $(".game:eq(2)").text() === $(".game:eq(8)").text()){
+                        if($(".game:eq(2)").text() === "x"){
+                            $("#board1").append("<p>x获胜</p>")
+                            return true;
+                        }else{
+                            $("#board1").append("<p>o获胜</p>")
+                            return true;
+                        }
+                    }
+                }
+                return false;
+
+            }
+            $("#emp_boa").click(function(){
+                $("#board1").empty().append("<p>游戏记录</p>");
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="outer" class="clearfix">
+        <div id="buttons" class="clearfix">
+            <div class="button" id="startBtn">开始</div>
+            <div class="button" id="resetBtn">重置</div>
+        </div>
+        <div id="game_board" class="clearfix">
+            <div id="lu" class="game"></div>
+            <div id="mu" class="game"></div>
+            <div id="ru" class="game"></div>
+            <div id="lm" class="game"></div>
+            <div id="mm" class="game"></div>
+            <div id="rm" class="game"></div>
+            <div id="ld" class="game">
+
+            </div>
+            <div id="md" class="game"></div>
+            <div id="rd" class="game"></div>
+        </div>
+
+        <div id="info" style="text-align: center">
+            游戏未开始
+        </div>
+    </div>
+    <div id="board">
+        <div id="board1">
+            <p>游戏记录</p>
+
+        </div>
+        <div class="button" id="emp_boa"> 清空</div>
+    </div>
+    <div id="current">
+        <div id="board2">
+
+        </div>
+        <div id="end">结束了</div>
+    </div>
+
+</body>
+</html>
